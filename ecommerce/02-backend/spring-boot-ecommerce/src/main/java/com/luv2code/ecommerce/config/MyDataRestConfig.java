@@ -1,5 +1,6 @@
 package com.luv2code.ecommerce.config;
 
+import com.luv2code.ecommerce.entity.Country;
 import com.luv2code.ecommerce.entity.Product;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
         config.getExposureConfiguration()
                 .forDomainType(ProductCategory.class)
+                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedActions))
+                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedActions));
+
+        config.getExposureConfiguration()
+                .forDomainType(Country.class)
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedActions))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedActions));
 
